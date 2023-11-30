@@ -38,7 +38,7 @@ export async function resolve(module, context, nextResolve) {
 				throw new Error(`Strict mode missing mock: "${module}"`);
 			} else if (isMissing) {
 				throw new Error(
-					`Late dynamic import: "${module}". Use the Mocker directly and call dispose after your test is done.`
+					`Late dynamic import: "${module}". Use the Pod class directly and call dispose after your test is done.`
 				);
 			}
 			if (deep && canRewrite(module)) {

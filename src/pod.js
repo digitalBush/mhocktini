@@ -5,7 +5,7 @@ import internal from "./internal.js";
 import Cache from "./cache.js";
 import getModuleUrl from "./getModuleUrl.js";
 
-export default class Mocker {
+export default class Pod {
 	#cache;
 	#caller;
 	#options;

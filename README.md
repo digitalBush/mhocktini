@@ -43,7 +43,7 @@ The default export is a function that sets up a mock environment, imports the ta
 
 ## Hard Mode
 
-If you need more control over the mock lifecycle (like dynamic imports), then you'll need to use the `Mocker` class directly.
+If you need more control over the mock lifecycle (like dynamic imports), then you'll need to use the `Pod` class directly.
 
 Let's consider a few files:
 
@@ -68,18 +68,18 @@ Now we can write a test that handles the dynamic import.
 import assert from "node:assert";
 import {test, mock} from "node:test";
 
-import {Mocker} from "modpod";
+import {Pod} from "modpod";
 
 test("hard mode", async (t) => {
-	const m = new Mocker({strict: true});
-	t.after(() => m.dispose()); // Clean up
+	const p = new Pod({strict: true});
+	t.after(() => p.dispose()); // Clean up
 
 	const dep = mock.fn(() => "mocked");
-	m.mock("./dep.js", {
+	p.mock("./dep.js", {
 		default: dep
 	});
 
-	const instance = await m.import("./target.js");
+	const instance = await p.import("./target.js");
 	assert.strictEqual(dep.mock.calls.length, 0);
 
 	const result = await instance.doSomething();

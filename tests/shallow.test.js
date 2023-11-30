@@ -46,6 +46,8 @@ describe("shallow (default)", () => {
 
 	it("should fail with late dynamic import", async () => {
 		const a = await mock("./scenarios/dynamic/a.js", {});
-		await assert.rejects(() => a.default());
+		await assert.rejects(() => a.default(), {
+			message: 'Late dynamic import: "./b.js". Use the Pod class directly and call dispose after your test is done.'
+		});
 	});
 });

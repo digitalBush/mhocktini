@@ -2,14 +2,14 @@ import {describe, it} from "node:test";
 import assert from "node:assert/strict";
 import path from "node:path";
 
-import {Mocker} from "../index.js"; // We're gonna test with our own mocker. 😍
+import {Pod} from "../index.js"; // We're gonna test using our own mocker. 😍
 
 describe("getModuleUrl", () => {
 	it("should error if no package.json is found", async (t) => {
-		const m = new Mocker();
-		t.after(() => m.dispose());
+		const p = new Pod();
+		t.after(() => p.dispose());
 
-		m.mock("node:fs/promises", {
+		p.mock("node:fs/promises", {
 			default: {
 				stat: () =>
 					Promise.resolve({
@@ -18,7 +18,7 @@ describe("getModuleUrl", () => {
 			}
 		});
 
-		const {default: getModuleUrl} = await m.import("./getModuleUrl.js");
+		const {default: getModuleUrl} = await p.import("./getModuleUrl.js");
 
 		await assert.rejects(() => getModuleUrl("#/lol.js", import.meta.url), {
 			message: `Can't locate package.json from ${path.dirname(import.meta.url)}`
@@ -26,16 +26,16 @@ describe("getModuleUrl", () => {
 	});
 
 	it("should error if error is not ENOENT", async (t) => {
-		const m = new Mocker();
-		t.after(() => m.dispose());
+		const p = new Pod();
+		t.after(() => p.dispose());
 
-		m.mock("node:fs/promises", {
+		p.mock("node:fs/promises", {
 			default: {
 				stat: () => Promise.reject(new Error("boom"))
 			}
 		});
 
-		const {default: getModuleUrl} = await m.import("./getModuleUrl.js");
+		const {default: getModuleUrl} = await p.import("./getModuleUrl.js");
 
 		await assert.rejects(() => getModuleUrl("#/lol.js", import.meta.url), {
 			message: "boom"
