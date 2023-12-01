@@ -43,6 +43,14 @@ describe("Pod", () => {
 		assert.deepEqual(await a.default(), "mocked");
 	});
 
+	it("should treat function mocks as a default export", async (t) => {
+		const p = new Pod();
+		t.after(() => p.dispose());
+		p.mock("./b.js", () => "mocked");
+		const a = await p.import("./scenarios/dynamic/a.js");
+		assert.deepEqual(await a.default(), "mocked");
+	});
+
 	it("should error when trying to deep strict mocks", async () => {
 		assert.throws(() => new Pod({deep: true, strict: true}), {
 			message: "Can't have a deep and strict mock"
