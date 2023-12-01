@@ -1,5 +1,4 @@
 module.exports = {
-	plugins: ["@stylistic/js"],
 	env: {
 		node: true,
 		es2024: true

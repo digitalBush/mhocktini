@@ -4,7 +4,7 @@
   "description": "Isolate your ES Modules for testing.",
   "main": "index.js",
   "type": "module",
-  "files":[
+  "files": [
     "src/**/!(*.test).js"
   ],
   "repository": {
@@ -14,19 +14,25 @@
   "scripts": {
     "test": "c8 node --test",
     "test:watch": "node --test --watch",
-    "cover:show": "c8 report -r html && open ./coverage/index.html"
+    "cover:show": "c8 report -r html && open ./coverage/index.html",
+    "check": "npm run lint && npm run format",
+    "lint": "eslint .",
+    "format": "prettier -c ."
   },
   "imports": {
     "#root/*.js": "./*.js"
   },
-  "keywords": ["esm", "mock"],
+  "keywords": [
+    "esm",
+    "mock"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "c8": "^8.0.1",
-    "eslint": "^8.53.0",
+    "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
-    "prettier": "^3.0.3"
+    "prettier": "^3.1.0"
   },
   "dependencies": {
     "callsites": "^4.1.0",
