@@ -17,7 +17,10 @@
     "cover:show": "c8 report -r html && open ./coverage/index.html",
     "check": "npm run lint && npm run format",
     "lint": "eslint .",
-    "format": "prettier -c ."
+    "format": "prettier -c .",
+    "preversion": "./tools/preversion.sh",
+    "version": "./tools/changelog.sh",
+    "postversion": "git push && git push --tags"
   },
   "imports": {
     "#root/*.js": "./*.js"
