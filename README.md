@@ -1,7 +1,7 @@
 # modpod
 
 [![Build Status](https://github.com/digitalbush/modpod/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/digitalBush/modpod/actions/workflows/test.yml?query=branch%3Amain)
-[![Coverage Status](https://coveralls.io/repos/github/digitalBush/modpod/badge.svg?branch=main)](https://coveralls.io/github/digitalBush/modpod?branch=main)
+[![codecov](https://codecov.io/gh/digitalBush/modpod/graph/badge.svg?token=4FVLKWNIYP)](https://codecov.io/gh/digitalBush/modpod)
 
 Isolate your ES Modules for testing.
 
