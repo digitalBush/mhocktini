@@ -20,7 +20,7 @@
     "format": "prettier -c .",
     "preversion": "./tools/preversion.sh",
     "version": "./tools/changelog.sh",
-    "postversion": "git push && git push --tags"
+    "postversion": "git push && git push --tags && gh release create v$(npm pkg get version|xargs) --generate-notes"
   },
   "imports": {
     "#root/*.js": "./*.js"
