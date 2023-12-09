@@ -18,7 +18,11 @@ export default class Pod {
 	}
 
 	mock(module, fake) {
-		//TODO: do we need to do any normalization of the fake? add a default if missing, etc?
+		//TODO: do we need to do path resolution for module?
+		if (typeof fake === "function") {
+			fake = {default: fake};
+		}
+
 		this.#cache.add(module, fake);
 	}
 

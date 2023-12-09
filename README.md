@@ -75,9 +75,9 @@ test("hard mode", async (t) => {
 	t.after(() => p.dispose()); // Clean up
 
 	const dep = mock.fn(() => "mocked");
-	p.mock("./dep.js", {
-		default: dep
-	});
+
+	// NOTE: dep will be wrapped {default: dep} because it's a function.
+	p.mock("./dep.js", dep);
 
 	const instance = await p.import("./target.js");
 	assert.strictEqual(dep.mock.calls.length, 0);
